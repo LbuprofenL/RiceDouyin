@@ -21,3 +21,6 @@
 go.work
 
 .idea
+
+# test_video
+public/

@@ -20,7 +20,6 @@ func newExpect(t *testing.T) *httpexpect.Expect {
 		},
 	})
 }
-
 func getTestUserToken(user string, e *httpexpect.Expect) (int, string) {
 	registerResp := e.POST("/douyin/user/register/").
 		WithQuery("username", user).WithQuery("password", user).

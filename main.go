@@ -2,11 +2,10 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/luuuweiii/RiceDouyin/service"
 )
 
 func main() {
-	go service.RunMessageServer()
+	// go service.RunMessageServer()
 
 	r := gin.Default()
 

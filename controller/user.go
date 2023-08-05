@@ -1,14 +1,16 @@
 package controller
 
 import (
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"sync/atomic"
+
+	"github.com/gin-gonic/gin"
 )
 
 // usersLoginInfo use map to store user info, and key is username+password for demo
 // user data will be cleared every time the server starts
 // test data: username=zhanglei, password=douyin
+// Guest data: username=""
 var usersLoginInfo = map[string]User{
 	"zhangleidouyin": {
 		Id:            1,
@@ -16,6 +18,13 @@ var usersLoginInfo = map[string]User{
 		FollowCount:   10,
 		FollowerCount: 5,
 		IsFollow:      true,
+	},
+	"Guest": {
+		Id:            -1,
+		Name:          "",
+		FollowCount:   0,
+		FollowerCount: 0,
+		IsFollow:      false,
 	},
 }
 
