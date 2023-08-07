@@ -3,10 +3,12 @@ package dao
 import "sync"
 
 type User struct {
-	Id       int64
-	Name     string
-	IsFollow bool
-	Avatar   string
+	Id            int64  `gorm:"column:id"`
+	Name          string `gorm:"column:username"`
+	IsFollow      bool
+	Avatar        string `gorm:"column:id"`
+	WorkCount     int    `gorm:"column:work_count"`
+	FavoriteCount int    `gorm:"column:favorite_count"`
 }
 
 func (User) TableName() string {
@@ -38,5 +40,5 @@ func (*UserDao) IsUserIdValid(uid int64) (bool, error) {
 
 // TODO:添加投稿数量
 func (*UserDao) PublishNewVideo(uid int64) error {
-	return  nil
+	return nil
 }

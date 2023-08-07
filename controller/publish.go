@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"path/filepath"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -62,7 +63,7 @@ func Publish(c *gin.Context) {
 	})
 }
 
-// PublishList all users have same publish video list
+// PublishList
 func PublishList(c *gin.Context) {
 	token := c.PostForm("token")
 
@@ -74,11 +75,18 @@ func PublishList(c *gin.Context) {
 
 	authorIdStr := c.Query("user_id")
 	user := usersLoginInfo[token]
-	DemoVideos,err := service.PublishList(authorIdStr,user.Id)
+	authorId, err := strconv.ParseInt(authorIdStr, 10, 64)
+	if err != nil {
+		c.JSON(http.StatusOK, Response{StatusCode: 1, StatusMsg: "将authorIdStr解析为int时出错"})
+		return
+	}
+	
+	DemoVideos, err := service.PublishList(authorId, user.Id)
 	if err != nil {
 		c.JSON(http.StatusOK, Response{StatusCode: 1, StatusMsg: "Fail to get publishlist"})
 		return
 	}
+
 	c.JSON(http.StatusOK, VideoListResponse{
 		Response: Response{
 			StatusCode: 0,

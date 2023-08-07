@@ -2,9 +2,7 @@ package service
 
 import (
 	"RiceDouyin/dao"
-	"RiceDouyin/util"
 	"errors"
-	"time"
 )
 
 const (
@@ -18,8 +16,8 @@ type publishVideoFlow struct {
 	videoURL string
 	coverURL string
 
-	videoId    int64
-	createTime time.Time
+	// videoId    int64
+	// createTime time.Time
 }
 
 func PublishVideo(userId int64, title string, videoURL string, coverURL string) error {
@@ -70,25 +68,26 @@ func (p *publishVideoFlow) checkParam() error {
 }
 
 func (p *publishVideoFlow) prepareInfo() error {
-	node, err := util.CreateNode()
-	if err != nil {
-		return errors.New("创建视频id节点时失败")
-	}
+	// node, err := util.CreateNode()
+	// if err != nil {
+	// 	return errors.New("创建视频id节点时失败")
+	// }
 
-	p.videoId = node.Generate().Int64()
-	p.createTime = time.Now()
+	// p.videoId = node.Generate().Int64()
+	// p.createTime = time.Now()
 	return nil
 }
 
 func (p *publishVideoFlow) saveInfo() error {
 	err := dao.NewVideoInstance().PublishNewVideo(
 		&dao.Video{
-			Id:         p.videoId,
-			UserId:     p.userId,
-			Title:      p.title,
-			VideoURL:   p.videoURL,
-			CoverURL:   p.coverURL,
-			CreateTime: p.createTime})
+			// Id:         p.videoId,
+			// CreateTime: p.createTime
+			UserId:   p.userId,
+			Title:    p.title,
+			VideoURL: p.videoURL,
+			CoverURL: p.coverURL,
+		})
 	if err != nil {
 		return err
 	}

@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS `user`;
 
 CREATE TABLE
     `user` (
-        `id` BIGINT UNSIGNED not NULL COMMENT '主键id',
+        `id` BIGINT UNSIGNED not NULL AUTO_INCREMENT COMMENT '主键id',
         `username` varchar(32) NOT NULL DEFAULT '' COMMENT '用户昵称',
         `password` varchar(16) NOT NULL DEFAULT '' COMMENT '用户密码',
         `create_time` timestamp NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
@@ -15,7 +15,7 @@ CREATE TABLE
 
 CREATE TABLE
     `video` (
-        `id` BIGINT UNSIGNED not NULL COMMENT '主键id',
+        `id` BIGINT UNSIGNED not  NULL AUTO_INCREMENT COMMENT '主键id',
         `user_id` BIGINT UNSIGNED not NULL COMMENT '作者id',
         `title` varchar(32) NOT NULL DEFAULT '' COMMENT '视频标题',
         `favorite_count` integer NOT NULL DEFAULT 0 COMMENT '视频获赞数量',
@@ -24,7 +24,7 @@ CREATE TABLE
         `video_url` varchar(255) NOT NULL DEFAULT '' COMMENT '视频路径',
         `create_time` timestamp NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
         PRIMARY KEY (`id`),
-        INDEX idk_video (`create_time` DESC)
+        INDEX idx_video (`create_time` DESC)
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COMMENT = '视频表';
 
 ALTER TABLE `video`

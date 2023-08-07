@@ -31,6 +31,5 @@ func NewFavoriteInstance() *FavoriteDao {
 
 //TODO:返回视频是否已经被点赞
 func (f *FavoriteDao) IsFavorite(userId int64, videoId int64) (bool, error) {
-	//错误信息报错在日志中
 	return true, nil
 }

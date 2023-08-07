@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
 	"RiceDouyin/controller"
+
+	"github.com/gin-gonic/gin"
 )
 
 func initRouter(r *gin.Engine) {
@@ -19,17 +20,19 @@ func initRouter(r *gin.Engine) {
 	apiRouter.POST("/publish/action/", controller.Publish)
 	apiRouter.GET("/publish/list/", controller.PublishList)
 
+	apiRouter.GET("/public/", controller.PublishList)
+
 	// extra apis - I
 	apiRouter.POST("/favorite/action/", controller.FavoriteAction)
 	apiRouter.GET("/favorite/list/", controller.FavoriteList)
-	apiRouter.POST("/comment/action/", controller.CommentAction)
-	apiRouter.GET("/comment/list/", controller.CommentList)
+	// apiRouter.POST("/comment/action/", controller.CommentAction)
+	// apiRouter.GET("/comment/list/", controller.CommentList)
 
-	// extra apis - II
-	apiRouter.POST("/relation/action/", controller.RelationAction)
-	apiRouter.GET("/relation/follow/list/", controller.FollowList)
-	apiRouter.GET("/relation/follower/list/", controller.FollowerList)
-	apiRouter.GET("/relation/friend/list/", controller.FriendList)
+	// // extra apis - II
+	// apiRouter.POST("/relation/action/", controller.RelationAction)
+	// apiRouter.GET("/relation/follow/list/", controller.FollowList)
+	// apiRouter.GET("/relation/follower/list/", controller.FollowerList)
+	// apiRouter.GET("/relation/friend/list/", controller.FriendList)
 	apiRouter.GET("/message/chat/", controller.MessageChat)
 	apiRouter.POST("/message/action/", controller.MessageAction)
 }

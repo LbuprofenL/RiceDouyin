@@ -13,7 +13,7 @@ func TestPublishVideo(t *testing.T) {
 		err := PublishVideo(uid, item.Title, item.VideoURL, item.CoverURL)
 		assert.Equal(t, nil, err)
 	}
-	ans, err := PublishList(strconv.Itoa(int(uid)), uid)
+	ans, err := PublishList(uid, uid)
 	assert.Equal(t, nil, err)
 	for index, item := range *ans {
 		assert.Equal(t, index, item.Id)

@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"RiceDouyin/dao"
 	"net/http"
 	"sync/atomic"
 
@@ -11,21 +12,13 @@ import (
 // user data will be cleared every time the server starts
 // test data: username=zhanglei, password=douyin
 // Guest data: username=""
-var usersLoginInfo = map[string]User{
+var usersLoginInfo = map[string]dao.User{
 	"zhangleidouyin": {
 		Id:            1,
 		Name:          "zhanglei",
-		FollowCount:   10,
-		FollowerCount: 5,
 		IsFollow:      true,
 	},
-	"Guest": {
-		Id:            -1,
-		Name:          "",
-		FollowCount:   0,
-		FollowerCount: 0,
-		IsFollow:      false,
-	},
+
 }
 
 var userIdSequence = int64(1)
@@ -38,7 +31,7 @@ type UserLoginResponse struct {
 
 type UserResponse struct {
 	Response
-	User User `json:"user"`
+	User dao.User `json:"user"`
 }
 
 func Register(c *gin.Context) {
@@ -53,7 +46,7 @@ func Register(c *gin.Context) {
 		})
 	} else {
 		atomic.AddInt64(&userIdSequence, 1)
-		newUser := User{
+		newUser := dao.User{
 			Id:   userIdSequence,
 			Name: username,
 		}
