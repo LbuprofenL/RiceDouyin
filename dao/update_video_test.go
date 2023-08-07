@@ -3,24 +3,12 @@ package dao
 import (
 	"fmt"
 	"testing"
-	"time"
 
 	"github.com/stretchr/testify/assert"
 )
 
 func TestUpdateVideo(t *testing.T) {
-	var vid int64 = 111
-	ok, err := NewVideoInstance().HasVideoById(vid)
-	assert.Equal(t, nil, err)
-	if !ok {
-		err := NewVideoInstance().PublishNewVideo(
-			&Video{
-				Id:            vid,
-				FavoriteCount: 0,
-				CommentCount:  0,
-				CreateTime:    time.Now()})
-		assert.Equal(t, nil, err)
-	}
+	var vid int64 = 25
 
 	v, err := NewVideoInstance().GetVideoByVideoId(vid)
 	assert.Equal(t, nil, err)

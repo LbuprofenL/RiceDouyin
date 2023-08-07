@@ -46,9 +46,8 @@ func (*VideoDao) PublishNewVideo(v *Video) error {
 }
 
 // 修改记录(获赞数，评论数)
-// TODO:Debug
 func (*VideoDao) LikeVideo(vid int64) error {
-	err := db.Model(&Video{Id: vid}).UpdateColumn("favorite_count", gorm.Expr("favorite_count + ?", 1)).Error
+	err := db.Model(&Video{}).Where("id = ?", vid).UpdateColumn("favorite_count", gorm.Expr("favorite_count + ?", 1)).Error
 	if err != nil {
 		return errors.New("数据库添加点赞记录时出错")
 	}
@@ -56,7 +55,7 @@ func (*VideoDao) LikeVideo(vid int64) error {
 }
 
 func (*VideoDao) CommentVideo(vid int64) error {
-	err := db.Model(&Video{Id: vid}).UpdateColumn("comment_count", gorm.Expr("comment_count + ?", 1)).Error
+	err := db.Model(&Video{}).Where("id = ?", vid).UpdateColumn("comment_count", gorm.Expr("comment_count + ?", 1)).Error
 	if err != nil {
 		return errors.New("数据库添加评论记录时出错")
 	}
