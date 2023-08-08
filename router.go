@@ -20,8 +20,8 @@ func initRouter(r *gin.Engine) {
 	apiRouter.POST("/publish/action/", controller.Publish)
 	apiRouter.GET("/publish/list/", controller.PublishList)
 
-	apiRouter.GET("/public/", controller.PublishList)
-
+	apiRouter.GET("/video/:path", controller.PlayVideo)
+	apiRouter.GET("/cover/:path", controller.Cover)
 	// extra apis - I
 	apiRouter.POST("/favorite/action/", controller.FavoriteAction)
 	apiRouter.GET("/favorite/list/", controller.FavoriteList)

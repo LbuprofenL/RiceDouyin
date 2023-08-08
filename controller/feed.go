@@ -21,11 +21,16 @@ func Feed(c *gin.Context) {
 
 	latestTimeStr := c.Query("latest_time")
 	var latestTime time.Time
-	if len(latestTimeStr) == 0 {
+	l, _ := strconv.ParseInt(latestTimeStr, 10, 64)
+	if l >= 1e12 && l < 1e13 {
+		l = l / 1000
+	}
+	latestTimeTmp := time.Unix(l, 0)
+	if len(latestTimeStr) == 0 || latestTimeTmp.After(time.Now()) {
 		latestTime = time.Now()
 	} else {
-		l, _ := strconv.ParseInt(latestTimeStr, 10, 64)
-		latestTime = time.Unix(l, 0)
+		latestTime = latestTimeTmp
+
 	}
 	token := c.Query("token")
 	user := usersLoginInfo[token]

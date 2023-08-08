@@ -112,7 +112,7 @@ func (f *feedFlow) packInfo() error {
 		f.packedVideoList[idx].Title = item.Title
 		f.packedVideoList[idx].FavoriteCount = item.FavoriteCount
 		f.packedVideoList[idx].CommentCount = item.CommentCount
-		//TODO:并发优化
+		//TODO并发优化
 		f.packedVideoList[idx].IsFavorite, _ = dao.NewFavoriteInstance().IsFavorite(f.userId, item.Id)
 	}
 	return nil

@@ -36,7 +36,7 @@ var DemoVideos = []service.VideoItem{
 	{
 		Id:            5,
 		Author:        DemoUserD,
-		VideoURL:      "https://www.w3schools.com/html/movie.mp4",
+		VideoURL:      "http://127.0.0.1:8080/play/archive/video/yuqi.mp4",
 		CoverURL:      "https://cdn.pixabay.com/photo/2016/03/27/18/10/bear-1283347_1280.jpg",
 		FavoriteCount: 5,
 		CommentCount:  5,
