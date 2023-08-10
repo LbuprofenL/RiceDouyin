@@ -20,8 +20,10 @@
 # Go workspace file
 go.work
 
+.vscode
 .idea
 *.xmind
 
 # test_video
 public/
+git-filter-repo
