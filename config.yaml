@@ -1,0 +1,27 @@
+name: "douyin_test"
+mode: "dev"
+port: "8888"
+version: "v1.0"
+
+log:
+  level: "debug"
+  filename: "douyin_test.log"
+  max_size: 200
+  max_age: 30
+  max_backups: 7
+
+mysql:
+  host: "127.0.0.1"
+  port: 3306
+  username: "root"
+  password: "123456"
+  dbname: "douyin"
+  max_open_conn: 200
+  max_idle_conn: 50
+
+redis:
+  host: "114.132.199.101"
+  port: 6379
+  db: 7
+  password: "binken"
+  pool_size: 100

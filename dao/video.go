@@ -17,6 +17,7 @@ type Video struct {
 	VideoURL      string    `gorm:"video_url"`      //视频文件保存路径
 	CoverURL      string    `gorm:"cover_url"`      //视频封面文件保存路径
 	CreateTime    time.Time `gorm:"create_time"`    //视频上传时间
+	UpdateTime    time.Time `gorm:"update_time"`    //记录更新时间
 }
 
 func (Video) TableName() string {
@@ -39,7 +40,7 @@ func NewVideoInstance() *VideoDao {
 
 // 添加记录
 func (*VideoDao) PublishNewVideo(v *Video) error {
-	if err := db.Model(&Video{}).Omit("id", "create_time").Create(v).Error; err != nil {
+	if err := db.Model(&Video{}).Omit("id", "create_time", "update_time").Create(v).Error; err != nil {
 		return errors.New("数据库添加视频记录时出错")
 	}
 	return nil
@@ -54,8 +55,23 @@ func (*VideoDao) LikeVideo(vid int64) error {
 	return nil
 }
 
+func (*VideoDao) LikeVideoWithTransaction(tx *gorm.DB, vid int64) error {
+	err := tx.Model(&Video{}).Where("id = ?", vid).UpdateColumn("favorite_count", gorm.Expr("favorite_count + ?", 1)).Error
+	if err != nil {
+		return errors.New("数据库添加点赞记录时出错")
+	}
+	return nil
+}
+
 func (*VideoDao) CommentVideo(vid int64) error {
 	err := db.Model(&Video{}).Where("id = ?", vid).UpdateColumn("comment_count", gorm.Expr("comment_count + ?", 1)).Error
+	if err != nil {
+		return errors.New("数据库添加评论记录时出错")
+	}
+	return nil
+}
+func (*VideoDao) CommentVideoWithTransaction(tx *gorm.DB, vid int64) error {
+	err := tx.Model(&Video{}).Where("id = ?", vid).UpdateColumn("comment_count", gorm.Expr("comment_count + ?", 1)).Error
 	if err != nil {
 		return errors.New("数据库添加评论记录时出错")
 	}

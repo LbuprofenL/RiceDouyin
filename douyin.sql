@@ -23,6 +23,7 @@ CREATE TABLE
         `cover_url` varchar(255) NOT NULL DEFAULT '' COMMENT '封面路径',
         `video_url` varchar(255) NOT NULL DEFAULT '' COMMENT '视频路径',
         `create_time` timestamp NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
+        `update_time` timestamp NOT NULL DEFAULT current_timestamp COMMENT '最近一次更新时间',
         PRIMARY KEY (`id`),
         INDEX idx_video (`create_time` DESC)
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COMMENT = '视频表';
